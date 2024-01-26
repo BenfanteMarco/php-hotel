@@ -53,10 +53,11 @@
     <title>php-hotel</title>
 </head>
 <body>
-    <div class="container">
+    <?php include './header.php' ?>
+    <div class="container-fluid bg-black ">
         <div class="row">
-            <div class="col-12">
-                <table class="table table-dark text-center">
+            <div class="col-12 mt-5">
+                <table class="table text-center">
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -81,5 +82,6 @@
             </div>
         </div>
     </div>
+    <?php include './footer.php' ?>
 </body>
 </html>
