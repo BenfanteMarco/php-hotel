@@ -40,6 +40,22 @@
 
     ];
 
+$filtered_hotels = $hotels;
+
+if (isset($_GET['parking']) && $_GET['parking'] != '') {
+
+    $newHotels = [];
+    $parking = $_GET['parking'];
+    $parking = filter_var($parking, FILTER_VALIDATE_BOOLEAN);
+
+    foreach ($filtered_hotels as $hotel) {
+        if ($hotel['parking'] == $parking) {
+            $newHotels[] = $hotel;
+        };
+    }
+
+$filtered_hotels = $newHotels;
+}
 
 
 ?>
@@ -56,6 +72,21 @@
     <?php include './header.php' ?>
     <div class="container-fluid bg-black ">
         <div class="row">
+            <div class="col-6 mt-4">
+                <form action="./index.php" method="GET">
+                    <div>
+                        <label for="parking" class=" form-label text-white">Parking:</label>
+                        <select class="w-25 form-select " name="parking" id="parking">
+                            <option value="">Parking</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                        <div class="pt-4">
+                            <button type="submit" class="btn btn-secondary">Filtra</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="col-12 mt-5">
                 <table class="table text-center">
                     <thead>
@@ -68,7 +99,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($hotels as $hotel) { ?>
+                        <?php foreach ($filtered_hotels as $hotel) { ?>
                             <tr>
                                 <td> <?php echo $hotel['name'] ?></td>
                                 <td> <?php echo $hotel['description'] ?></td>
